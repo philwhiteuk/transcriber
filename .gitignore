@@ -1,0 +1,4 @@
+node_modules
+workspace/*
+!workspace/annotations/.gitkeep
+!workspace/upload/.gitkeep

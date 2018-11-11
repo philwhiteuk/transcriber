@@ -1,0 +1,19 @@
+{
+  "name": "transcriber",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@google-cloud/vision": "^0.23.0",
+    "@types/gulp": "^4.0.5",
+    "@types/node": "^10.12.5",
+    "@types/through2": "^2.0.34",
+    "@types/vinyl": "^2.0.2",
+    "gulp": "^4.0.0",
+    "gulp-cli": "^2.0.1",
+    "gulp-concat": "^2.6.1",
+    "through2": "^3.0.0",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.1.6"
+  }
+}

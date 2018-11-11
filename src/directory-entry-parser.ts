@@ -99,10 +99,10 @@ export function parseDirectoryEntry(directoryEntry: string): Business {
       ? mapBusinessCodes(businessCodeMatch[1].match(/[A-G]/g))
       : '',
     services_available: businessCodeMatch
-      ? mapBusinessCodes(businessCodeMatch[1].match(/[H-P]/g))
+      ? mapBusinessCodes(businessCodeMatch[1].match(/[Q-X]/g))
       : '',
     work_undertaken: businessCodeMatch
-      ? mapBusinessCodes(businessCodeMatch[1].match(/[Q-X]/g))
+      ? mapBusinessCodes(businessCodeMatch[1].match(/[H-P]/g))
       : '',
   };
 }

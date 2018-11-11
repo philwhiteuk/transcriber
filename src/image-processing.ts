@@ -1,9 +1,3 @@
-import { ImageAnnotatorClient } from '@google-cloud/vision';
-
-export function annotateImage(imageFilePath: string): any {
-  return new ImageAnnotatorClient().documentTextDetection(imageFilePath);
-}
-
 type vertices = Array<{
   x: number;
   y: number;

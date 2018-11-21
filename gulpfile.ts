@@ -1,4 +1,3 @@
-import { ImageAnnotatorClient } from '@google-cloud/vision';
 import { dest, series, src } from 'gulp';
 import concat from 'gulp-concat';
 import through2 from 'through2';
@@ -11,11 +10,11 @@ import {
   symbolReducer,
   wordReducer,
 } from './src/utils/annotation-mapper';
-import { fetchImageAnnotation } from './src/utils/fetch-annotation';
+import { fetchAnnotation } from './src/utils/fetch-annotation';
 
 function process() {
   return src('./workspace/images/*.jpg')
-    .pipe(through2.obj(annotateImages(fetchImageAnnotation(ImageAnnotatorClient))))
+    .pipe(through2.obj(annotateImages(fetchAnnotation())))
     .pipe(dest('./workspace/annotations'));
 }
 

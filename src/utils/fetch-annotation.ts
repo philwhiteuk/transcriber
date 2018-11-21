@@ -1,9 +1,7 @@
 import { ImageAnnotatorClient } from '@google-cloud/vision';
 
-export function fetchImageAnnotation(c: ImageAnnotatorClient) {
-  return async (imagePath: string): Promise<BatchAnnotateImageResponse> => {
-    return await new c().documentTextDetection(imagePath);
-  };
+export function fetchAnnotation(): (imagePath: string) => Promise<BatchAnnotateImageResponse> {
+  return async imagePath => await new ImageAnnotatorClient().documentTextDetection(imagePath);
 }
 
 export interface Vertex {

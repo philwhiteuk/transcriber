@@ -24,7 +24,7 @@ describe('transformers: images annotator', () => {
     expect(annotationFetcherArgs).to.eql(['/a/b/c/d.jpg']);
     expect(callbackArgs[0]).to.be.null;
     expect(callbackArgs[1]).to.be.an.instanceof(File);
-    expect(callbackArgs[1].path).to.eql('d.json');
+    expect(callbackArgs[1].path).to.eql('d.orig.json');
   });
 
   it('should resolve the annotation response', async () => {

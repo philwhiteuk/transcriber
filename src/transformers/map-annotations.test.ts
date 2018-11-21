@@ -13,7 +13,7 @@ describe('transformers: annotations mapper', () => {
     });
 
     const mockAnnotationFile = new File({
-      path: '/q/z/f/g.json',
+      path: '/q/z/f/g.orig.json',
       contents: Buffer.from(JSON.stringify({ x: 'y' })),
     });
 

@@ -9,7 +9,7 @@ export function annotateImages(
   return async (imageFile, _, callback) => {
     const annotation = await imageAnnotationFetcher(imageFile.path);
     const transformedFile = new File({
-      path: imageFile.basename.replace(/jpg$/, 'json'),
+      path: imageFile.basename.replace(/jpg$/, 'orig.json'),
       contents: new Buffer(JSON.stringify(annotation)),
     });
 

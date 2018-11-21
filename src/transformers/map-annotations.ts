@@ -15,7 +15,7 @@ export function mapAnnotations(
     }
 
     const mappedAnnotationFile = new File({
-      path: originalAnnotationFile.basename.replace(/\.json$/, '.mapped.json'),
+      path: originalAnnotationFile.basename.replace(/\.orig\.json$/, '.mapped.json'),
       contents: new Buffer(JSON.stringify(mappedJson)),
     });
 

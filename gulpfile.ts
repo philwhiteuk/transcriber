@@ -19,7 +19,7 @@ function process() {
 }
 
 function transform() {
-  return src(['./workspace/annotations/*.json', '!./workspace/annotations/*.mapped.json'])
+  return src(['./workspace/annotations/*.orig.json'])
     .pipe(through2.obj(mapAnnotations(annotationMapper(blockReducer, wordReducer, symbolReducer))))
     .pipe(dest('./workspace/annotations'));
 }

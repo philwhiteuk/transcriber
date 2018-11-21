@@ -33,6 +33,22 @@ const ukPostcodeRegex = /([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-
 const tradeCodeRegex = /\n([A-X]+) ([^\n]*)\n/;
 const addressRegex = /^[^\n]*\n(.*)\nTel/s;
 
+const csvHeadersMap = {
+  rawString: 'Raw String',
+  name: 'Name',
+  postcode: 'Postcode',
+  address: 'Address',
+  employees: 'No. Employees',
+  trade_code: 'Trade Code',
+  processes_employed: 'Processes Employed',
+  services_available: 'Services Available',
+  work_undertaken: 'Work Undertaken',
+};
+
+export function stringToEntity(s: string) {
+  return new PrintersBusiness(s);
+}
+
 export class PrintersBusiness {
   constructor(private rawString: string) {}
 
@@ -40,13 +56,14 @@ export class PrintersBusiness {
     return this.rawString.split(/\n/)[0];
   }
 
-  get address(): { full: string; postcode: string } {
+  get address(): string {
     const address = this.rawString.match(addressRegex);
+    return address ? address[1].replace(/\n/, ' ') : '';
+  }
+
+  get postcode(): string {
     const postcode = this.rawString.match(ukPostcodeRegex);
-    return {
-      full: address ? address[1].replace(/\n/, ' ') : '',
-      postcode: postcode ? postcode[0] : '',
-    };
+    return postcode ? postcode[0] : '';
   }
 
   get trade_code(): string {
@@ -72,33 +89,13 @@ export class PrintersBusiness {
   }
 
   public toCsv(): string {
-    return format(
-      '"%s","%s","%s","%s","%s","%s","%s","%s"\n',
-      this.rawString,
-      this.name,
-      this.address.postcode,
-      this.address.full,
-      this.employees,
-      this.trade_code,
-      this.processes_employed,
-      this.services_available,
-      this.work_undertaken,
-    );
+    const values = Object.keys(csvHeadersMap).map(k => this[k]);
+    return format(`${values.map(_ => '"%s"').join(',')}`, ...values);
   }
 
-  public static csvHeaders(): string {
-    return format(
-      '"%s","%s","%s","%s","%s","%s","%s","%s"\n',
-      'Raw String',
-      'Name',
-      'Postcode',
-      'Address',
-      'No. Employees',
-      'Trade Code',
-      'Processes Employed',
-      'Services Available',
-      'Work Undertaken',
-    );
+  public static csvHeaders(): any {
+    const values = Object.keys(csvHeadersMap).map(k => csvHeadersMap[k]);
+    return format(`${values.map(_ => '"%s"').join(',')}`, ...values);
   }
 
   private mapBusinessCodes(codes: string[]): string {
